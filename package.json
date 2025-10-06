@@ -6,16 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "deploy": "git add . && git commit -m \"Update\" && git push -u origin main",
+    "go": "git add . && git commit -m 'Update' && git push -u origin main"
   },
   "dependencies": {
-    "next": "14.2.5",
+    "next": "13.4.12",
     "react": "18.2.0",
     "react-dom": "18.2.0"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.31",
-    "tailwindcss": "^3.4.9"
   }
 }

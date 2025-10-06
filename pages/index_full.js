@@ -3,13 +3,27 @@ import Head from "next/head";
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Primo Future VR Dortmund</title>
-        <meta
-          name="description"
-          content="Free-Roam VR in Dortmund. Kabellos bewegen, sprinten, ducken – als Squad gemeinsam durch Welten laufen."
-        />
-      </Head>
+  <Head>  
+  <title>Primo Future VR Dortmund</title>
+  <meta
+    name="description"
+    content="Free-Roam VR in Dortmund. Kabellos bewegen, sprinten, ducken – als Squad gemeinsam durch Welten laufen. Perfekt für Freunde, Firmen & Events."
+  />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Primo Future VR Dortmund – Free-Roam VR" />
+  <meta property="og:description" content="Kabellos bewegen, sprinten, ducken – Free-Roam VR in Dortmund. Perfekt für Freunde, Firmen & Events." />
+  <meta property="og:url" content="https://primofuturevr.de/" />
+  <meta property="og:image" content="https://primofuturevr.de/og.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Primo Future VR Dortmund – Free-Roam VR" />
+  <meta name="twitter:description" content="Free-Roam VR in Dortmund. Team-Action, die kickt." />
+  <meta name="twitter:image" content="https://primofuturevr.de/og.jpg" />
+
+  <link rel="canonical" href="https://primofuturevr.de/" />
+</Head>
+    
 
       <main className="bg-black text-white min-h-screen">
         {/* ===== HEADER ===== */}
