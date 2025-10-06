@@ -65,7 +65,24 @@ export default function Home() {
             </div>
           </div>
         </section>
+{/* ===== TRAILER ===== */}
+<section className="mx-auto max-w-6xl px-4 pt-10">
+  <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+    Trailer ansehen
+  </h2>
 
+  <div className="aspect-video w-full overflow-hidden rounded-xl ring-1 ring-white/10 shadow-lg">
+    <iframe
+      className="h-full w-full"
+      src="https://www.youtube-nocookie.com/embed/TlNYRyFK_Cc?rel=0&modestbranding=1&playsinline=1"
+      title="Primo Future VR Trailer"
+      loading="lazy"
+      referrerPolicy="strict-origin-when-cross-origin"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowFullScreen
+    />
+  </div>
+</section>
         {/* ===== SPIELE ===== */}
         <section className="mt-16 grid md:grid-cols-3 gap-6">
           {[
