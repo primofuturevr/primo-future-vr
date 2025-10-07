@@ -1,33 +1,44 @@
+import Image from "next/image";
 import Link from "next/link";
+import { games } from "./games";
 
-const games = [
-  { slug: "red-planet", title: "Red Planet", summary: "Verteidige die Mars-Basis gegen außerirdische Angriffe.", players: "2–10", duration: "10–15 Minuten", genre: "Sci-Fi" },
-  { slug: "spaceport", title: "Spaceport", summary: "Kämpfe um Ressourcen auf einer Raumstation am Rand der Galaxie.", players: "2–10", duration: "10–15 Minuten", genre: "Sci-Fi" },
-  { slug: "zombie-mall", title: "Zombie Mall", summary: "Verlassene Mall, enge Gänge, überall Zombies – Überleben im Team.", players: "1–6", duration: "10–15 Minuten", genre: "Zombie" },
-  { slug: "battle-for-new-year", title: "Battle for New Year", summary: "Festliches Neujahrs-Setting mit schnellen, strategischen Kämpfen.", players: "1–6", duration: "10–15 Minuten", genre: "Event" },
-  { slug: "the-citadel", title: "The Citadel", summary: "High-Tech-Raumschiff, Hologramme, Kontrollpunkt erobern.", players: "2–10", duration: "10–15 Minuten", genre: "Sci-Fi/Postapok." },
-  { slug: "zombie-farm", title: "Zombie Farm", summary: "Bauernhof verteidigen – Zombies aus allen Richtungen, Deckung im Maisfeld.", players: "1–6", duration: "10–15 Minuten", genre: "Zombie" },
-  { slug: "nuklearer-bunker", title: "Nuklearer Bunker", summary: "Geheimer Bunker: Sprengköpfe & radioaktive Abfälle als Verstecke.", players: "2–10", duration: "10–15 Minuten", genre: "Postapok." },
-  { slug: "the-last-frontier", title: "The Last Frontier", summary: "Cartoony Endzeit-Stadt – letzte Bastion sichern, Adrenalin pur.", players: "2–10", duration: "10–15 Minuten", genre: "Postapok." },
-  { slug: "last-train", title: "Last Train", summary: "Spezialoperation im Industrie-Depot – klassischer Shooter-Flow.", players: "2–10", duration: "10–12 Minuten", genre: "Shooter" },
-  { slug: "wall-street", title: "Wall Street", summary: "Büro-Arena für Firmenkämpfe: Kabinen, Korridore, viele Ecken.", players: "2–10", duration: "7–10 Minuten", genre: "Teamevent" }
-];
-
-export default function SpielePage() {
+export default function Spiele() {
   return (
-    <main className="p-8">
-      <h1 className="text-3xl font-bold mb-6">Unsere Spiele</h1>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {games.map((g) => (
-          <article key={g.slug} className="border rounded-lg p-4">
-            <h2 className="text-lg font-semibold">{g.title}</h2>
-            <p className="text-sm text-gray-600">{g.summary}</p>
-            <p className="mt-2 text-sm">👥 {g.players} | ⏱ {g.duration}</p>
-            <p className="text-sm">🏷 {g.genre}</p>
-            <Link href={`/spiele/${g.slug}`} className="inline-block mt-3 underline">
-              Details &amp; Buchen →
+    <main className="min-h-screen bg-black text-white px-8 py-16">
+      <h1 className="text-5xl font-bold text-center mb-12 text-cyan-400 drop-shadow-[0_0_15px_#00ffff]">
+        Unsere Spiele
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+        {games.map((game) => (
+          <div
+            key={game.slug}
+            className="group relative bg-[#0a0a0a] border border-cyan-500/30 rounded-2xl p-5 overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:border-cyan-400/80 hover:shadow-[0_0_25px_#00ffff50]"
+          >
+            <div className="h-48 w-full overflow-hidden rounded-xl mb-4">
+              <Image
+                src={game.image}
+                alt={game.title}
+                width={500}
+                height={300}
+                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition duration-500"
+              />
+            </div>
+            <h2 className="text-2xl font-semibold text-cyan-300 mb-2">
+              {game.title}
+            </h2>
+            <p className="text-gray-400 mb-6">{game.description}</p>
+            <div className="flex items-center gap-3 text-gray-400 text-sm mb-6">
+              <span>👥 2–10</span>
+              <span>🕒 10–15 Min</span>
+              <span>🎮 VR</span>
+            </div>
+            <Link
+              href={`/spiele/${game.slug}`}
+              className="block text-center border border-cyan-400 text-cyan-300 py-2 rounded-full font-semibold hover:bg-cyan-400 hover:text-black transition-all duration-300 group-hover:shadow-[0_0_15px_#00ffff]"
+            >
+              Details & Buchen →
             </Link>
-          </article>
+          </div>
         ))}
       </div>
     </main>

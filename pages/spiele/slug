@@ -1,0 +1,98 @@
+import Link from "next/link";
+import Image from "next/image";
+import { games } from "../games";
+
+const NEON = { bg: "#000", cyan: "#00E6FF", red: "#E40000" };
+
+function findGame(slug) {
+  return games.find((g) => g.slug === slug);
+}
+
+export default function GameDetail({ query }) {
+  // Next 14 (pages router) -> useRouter war vorher; hier vereinfachen wir mit Window-Fallback:
+  const slug =
+    (typeof window !== "undefined" && window.location.pathname.split("/").pop()) ||
+    (query && query.slug) ||
+    "";
+
+  const g = findGame(slug || "");
+  if (!g) {
+    return (
+      <main style={{ padding: 24, color: "#fff", background: NEON.bg, minHeight: "100vh" }}>
+        Spiel nicht gefunden. <Link href="/spiele" style={{ color: NEON.cyan }}>Zurück</Link>
+      </main>
+    );
+  }
+
+  return (
+    <main style={{ background: NEON.bg, color: "#e8faff", minHeight: "100vh" }}>
+      <div style={{ padding: 24 }}>
+        <Link href="/spiele" style={{ color: NEON.cyan, textDecoration: "underline" }}>
+          ← Zurück zur Übersicht
+        </Link>
+
+        <h1 style={{ color: NEON.cyan, fontWeight: 800, fontSize: 36, marginTop: 16, textShadow: `0 0 16px ${NEON.cyan}` }}>
+          {g.title}
+        </h1>
+
+        <div style={{ position: "relative", aspectRatio: "16 / 9", marginTop: 16, borderRadius: 12, overflow: "hidden" }}>
+          <Image
+            src={g.image || "/games/thumb.svg"}
+            alt={g.title}
+            fill
+            style={{ objectFit: "cover", opacity: 0.95 }}
+          />
+          <div style={{ position: "absolute", inset: 0, boxShadow: `inset 0 0 0 1px ${NEON.cyan}33` }} />
+        </div>
+
+        <section style={{ marginTop: 18, display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))" }}>
+          <div
+            style={{
+              border: `1px solid ${NEON.cyan}40`,
+              borderRadius: 12,
+              padding: 16,
+              background: "rgba(255,255,255,0.02)",
+            }}
+          >
+            <h2 style={{ margin: 0, fontWeight: 700, color: "#e8faff" }}>Kurzinfo</h2>
+            <p style={{ color: "#9fb7c3" }}>{g.description}</p>
+            <ul style={{ listStyle: "none", padding: 0, margin: 0, color: "#91aab7" }}>
+              <li>👥 Spieler: {g.players || "2–10"}</li>
+              <li>⏱️ Dauer: {g.duration || "10–15 Minuten"}</li>
+              <li>🎮 Genre: {g.genre || "VR"}</li>
+              <li>🎯 Zielgruppe: {g.audience || "Alle"}</li>
+              <li>🕹️ Modi: {(g.modes && g.modes.join(", ")) || "—"}</li>
+            </ul>
+          </div>
+
+          <div
+            style={{
+              border: `1px solid ${NEON.cyan}40`,
+              borderRadius: 12,
+              padding: 16,
+              background: "rgba(255,255,255,0.02)",
+            }}
+          >
+            <h2 style={{ margin: 0, fontWeight: 700, color: "#e8faff" }}>Jetzt buchen</h2>
+            <p style={{ color: "#9fb7c3" }}>Wähle Termin &amp; Teamgröße – wir kümmern uns um den Rest.</p>
+            <a
+              href={`/buchen?spiel=${encodeURIComponent(g.slug)}`}
+              style={{
+                display: "inline-block",
+                padding: "10px 16px",
+                borderRadius: 999,
+                border: `1px solid ${NEON.cyan}`,
+                color: NEON.cyan,
+                textDecoration: "none",
+                fontWeight: 700,
+                boxShadow: `0 0 14px 0 ${NEON.cyan}66`,
+              }}
+            >
+              Jetzt {g.title} buchen
+            </a>
+          </div>
+        </section>
+      </div>
+    </main>
+  );
+}
